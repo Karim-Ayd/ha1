@@ -87,6 +87,9 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
+    //TODO hier weitere Tests erstellen
+
     @Test
     @DisplayName("should display positive result after division of two positive numbers")
     void testPositiveDivision(){
@@ -104,7 +107,42 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    @DisplayName("should display at most 10 characters on screen")
+    void testScreenLengthLimit(){
+        Calculator calc = new Calculator();
 
-    //TODO hier weitere Tests erstellen
+        calc.pressDigitKey(9);
+        calc.pressBinaryOperationKey("/");
+        calc.pressDigitKey(7);
+        calc.pressEqualsKey();
+
+        String expected = "1.28571428";
+        String actual = calc.readScreen();
+
+        System.out.println(actual);
+        System.out.println(actual.length());
+
+        assertEquals(true, actual.length()<= 10);
+    }
+
+    @Test
+    @DisplayName("should only clear screen on first press of C and full reeset on second")
+    void testClearKey(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(5);
+        calc.pressClearKey();
+        calc.pressEqualsKey();
+
+        String expected = "2";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+    }
 }
+
 
