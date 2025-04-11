@@ -143,6 +143,38 @@ class CalculatorTest {
         assertEquals(expected, actual);
 
     }
+
+    @Test
+    @DisplayName("should not allow two points in one number")
+
+    void testDoubleDot(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(5);
+        calc.pressDotKey();
+        calc.pressDigitKey(6);
+        calc.pressDotKey();
+        calc.pressDigitKey(7);
+
+        String expected = "5.67";
+        String actual = calc.readScreen();
+
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    @DisplayName("should not write a negative sign before 0")
+    void testNegativeKeyOnZero(){
+        Calculator calc = new Calculator();
+
+        calc.pressNegativeKey();
+
+        String expected = "0";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
 }
 
 
